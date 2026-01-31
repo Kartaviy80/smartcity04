@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Дніпро СМАРТ СІТІ - Платформа міських сервісів</title>
+  <meta name="description" content="Платформа міських сервісів для взаємодії з громадою міста Дніпро">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Custom Font -->
+  <style>
+    @font-face {
+      font-family: 'DniproCity';
+      src: url('fonts/DniproCity-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DniproCity';
+      src: url('fonts/DniproCity-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+    
+    * {
+      font-family: 'DniproCity', 'Inter', system-ui, sans-serif;
+    }
+    
+    /* Animations */
+    @keyframes float-slow {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -20px) scale(1.05); }
+      50% { transform: translate(-20px, 30px) scale(0.95); }
+      75% { transform: translate(-30px, -10px) scale(1.02); }
+    }
+    @keyframes float-medium {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-40px, 20px) scale(1.08); }
+      66% { transform: translate(30px, -30px) scale(0.92); }
+    }
+    @keyframes float-fast {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(25px, -25px) scale(1.1); }
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.15; transform: scale(1); }
+      50% { opacity: 0.25; transform: scale(1.05); }
+    }
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+    }
+    @keyframes drift {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(15px, -10px) rotate(2deg); }
+      50% { transform: translate(-10px, 15px) rotate(-1deg); }
+      75% { transform: translate(-15px, -5px) rotate(1deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 0.8; transform: scale(1); }
+    }
+    @keyframes single-pulse {
+      0% { opacity: 0; box-shadow: 0 0 8px rgba(147, 197, 253, 0.15); transform: scale(0.9); }
+      20% { opacity: 0.4; box-shadow: 0 0 20px rgba(147, 197, 253, 0.35), 0 0 35px rgba(147, 197, 253, 0.15); transform: scale(1); }
+      50% { opacity: 0.4; box-shadow: 0 0 25px rgba(147, 197, 253, 0.4), 0 0 40px rgba(147, 197, 253, 0.2); transform: scale(1); }
+      75% { opacity: 0.25; box-shadow: 0 0 18px rgba(147, 197, 253, 0.25), 0 0 30px rgba(147, 197, 253, 0.1); transform: scale(1.02); }
+      100% { opacity: 0; box-shadow: 0 0 10px rgba(147, 197, 253, 0.05); transform: scale(1.05); }
+    }
+    
+    .animate-float-slow { animation: float-slow 20s ease-in-out infinite; }
+    .animate-float-medium { animation: float-medium 15s ease-in-out infinite; }
+    .animate-float-fast { animation: float-fast 10s ease-in-out infinite; }
+    .animate-pulse-slow { animation: pulse-slow 12s ease-in-out infinite; }
+    .animate-shimmer-1 { animation: shimmer 8s ease-in-out infinite; }
+    .animate-shimmer-2 { animation: shimmer 12s ease-in-out infinite 2s; }
+    .animate-shimmer-3 { animation: shimmer 10s ease-in-out infinite 4s; }
+    .animate-shimmer-4 { animation: shimmer 14s ease-in-out infinite 1s; }
+    .animate-shimmer-5 { animation: shimmer 9s ease-in-out infinite 3s; }
+    .animate-drift-1 { animation: drift 25s ease-in-out infinite; }
+    .animate-drift-2 { animation: drift 30s ease-in-out infinite 5s; }
+    .animate-drift-3 { animation: drift 20s ease-in-out infinite 10s; }
+    .animate-sparkle-1 { animation: sparkle 4s ease-in-out infinite; }
+    .animate-sparkle-2 { animation: sparkle 5s ease-in-out infinite 1.5s; }
+    .animate-sparkle-3 { animation: sparkle 6s ease-in-out infinite 3s; }
+    .animate-sparkle-4 { animation: sparkle 4.5s ease-in-out infinite 2s; }
+    .animate-sparkle-5 { animation: sparkle 5.5s ease-in-out infinite 0.5s; }
+    .animate-single-pulse { animation: single-pulse 10s ease-in-out forwards; }
+    
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+    .glass-card-bright {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+  </style>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {}
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen">
+  <div id="app" class="min-h-screen relative overflow-x-hidden" style="background-image: url('background.png'); background-position: center top; background-size: cover; background-repeat: no-repeat;">
+    
+    <!-- Gradient overlay -->
+    <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(to bottom, transparent 40%, rgba(30, 80, 150, 0.35) 100%);"></div>
+    
+    <!-- Living background - animated elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      <!-- Glowing squares -->
+      <div class="absolute w-8 h-8 bg-blue-400/20 rounded-sm animate-shimmer-1 animate-drift-1" style="top: 15%; left: 10%;"></div>
+      <div class="absolute w-6 h-6 bg-cyan-400/25 rounded-sm animate-shimmer-2 animate-drift-2" style="top: 25%; left: 25%;"></div>
+      <div class="absolute w-10 h-10 bg-blue-300/15 rounded-sm animate-shimmer-3 animate-drift-3" style="top: 35%; left: 8%;"></div>
+      <div class="absolute w-5 h-5 bg-sky-400/20 rounded-sm animate-shimmer-4 animate-drift-1" style="top: 55%; left: 15%;"></div>
+      <div class="absolute w-7 h-7 bg-blue-500/20 rounded-sm animate-shimmer-5 animate-drift-2" style="top: 70%; left: 5%;"></div>
+      
+      <div class="absolute w-6 h-6 bg-cyan-300/20 rounded-sm animate-shimmer-2 animate-drift-3" style="top: 20%; right: 15%;"></div>
+      <div class="absolute w-8 h-8 bg-blue-400/15 rounded-sm animate-shimmer-4 animate-drift-1" style="top: 40%; right: 8%;"></div>
+      <div class="absolute w-5 h-5 bg-sky-300/25 rounded-sm animate-shimmer-1 animate-drift-2" style="top: 60%; right: 20%;"></div>
+      <div class="absolute w-9 h-9 bg-blue-300/20 rounded-sm animate-shimmer-3 animate-drift-3" style="top: 75%; right: 10%;"></div>
+      
+      <!-- Sparkles -->
+      <div class="absolute w-2 h-2 bg-white rounded-full animate-sparkle-1" style="top: 18%; left: 30%;"></div>
+      <div class="absolute w-1.5 h-1.5 bg-cyan-200 rounded-full animate-sparkle-2" style="top: 32%; left: 45%;"></div>
+      <div class="absolute w-2 h-2 bg-blue-200 rounded-full animate-sparkle-3" style="top: 48%; left: 12%;"></div>
+      <div class="absolute w-1.5 h-1.5 bg-white rounded-full animate-sparkle-4" style="top: 65%; left: 35%;"></div>
+      <div class="absolute w-2 h-2 bg-sky-200 rounded-full animate-sparkle-5" style="top: 80%; left: 22%;"></div>
+      
+      <div class="absolute w-1.5 h-1.5 bg-white rounded-full animate-sparkle-3" style="top: 22%; right: 35%;"></div>
+      <div class="absolute w-2 h-2 bg-cyan-100 rounded-full animate-sparkle-1" style="top: 45%; right: 25%;"></div>
+      <div class="absolute w-1.5 h-1.5 bg-blue-100 rounded-full animate-sparkle-4" style="top: 58%; right: 40%;"></div>
+      <div class="absolute w-2 h-2 bg-white rounded-full animate-sparkle-2" style="top: 72%; right: 30%;"></div>
+      
+      <!-- Pulsing boxes container -->
+      <div id="glowBoxes"></div>
+    </div>
+    
+    <!-- 3D Box illustration -->
+    <img src="box.png" alt="" class="absolute top-16 right-4 lg:right-16 xl:right-20 w-48 sm:w-56 md:w-64 lg:w-80 xl:w-96 pointer-events-none z-0" style="max-width: 40%;">
+    
+    <!-- Ambient glow effects -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      <div class="absolute w-[600px] h-[600px] rounded-full opacity-20 animate-float-slow" style="background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%); top: 10%; left: -10%; filter: blur(80px);"></div>
+      <div class="absolute w-[500px] h-[500px] rounded-full opacity-15 animate-float-medium" style="background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%); top: 40%; right: -5%; filter: blur(100px);"></div>
+      <div class="absolute w-[400px] h-[400px] rounded-full opacity-20 animate-float-fast" style="background: radial-gradient(circle, rgba(34, 211, 238, 0.3) 0%, transparent 70%); bottom: 20%; left: 20%; filter: blur(60px);"></div>
+      <div class="absolute w-[350px] h-[350px] rounded-full opacity-15 animate-pulse-slow" style="background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%); top: 60%; right: 30%; filter: blur(70px);"></div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="relative z-10">
+      <main>
+        <!-- Hero Section -->
+        <section class="relative py-12 lg:py-16 xl:py-18">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <a href="pro-dnipro.pdf" target="_blank" rel="noopener noreferrer" class="inline-block mb-6 px-5 py-2 rounded-full border border-white/60 text-white text-sm font-medium hover:bg-white/15 transition-all duration-300" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
+                  Про Дніпро
+                </a>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-5xl xl:text-[3.5rem] font-bold leading-tight tracking-tight text-white">
+                  Дніпро
+                </h1>
+                <h2 class="text-4xl sm:text-5xl lg:text-5xl xl:text-[3.5rem] font-bold mb-4 xl:mb-5 leading-tight tracking-tight bg-clip-text text-transparent" style="background-image: linear-gradient(90deg, #3b82f6 0%, #06b6d4 50%, #22d3ee 100%);">
+                  СМАРТ СІТІ
+                </h2>
+                <p class="text-base xl:text-[1.05rem] text-slate-400 mb-8 max-w-md leading-relaxed">
+                  Платформа міських сервісів для взаємодії з громадою
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                  <a href="https://ednipro.dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-3 text-sm font-medium shadow-md shadow-blue-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/40 hover:-translate-y-0.5">
+                    Завантажити єДніпро
+                  </a>
+                  <a href="https://dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="rounded-lg px-6 py-3 text-sm font-medium text-white border border-cyan-500/40 transition-all duration-300 hover:border-cyan-400/60 hover:-translate-y-0.5" style="background: rgba(6, 182, 212, 0.25); backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);">
+                    Дніпровська міська рада
+                  </a>
+                </div>
+              </div>
+              <div class="hidden lg:block"></div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Search Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
+          <div id="searchContainer" class="rounded-xl shadow-lg border border-white/30 p-1 max-w-2xl mx-auto transition-all duration-300 hover:border-white/50 hover:shadow-xl" style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);">
+            <div class="relative">
+              <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+              <input type="search" id="searchInput" placeholder="Пошук послуг..." class="w-full pl-12 pr-4 py-3 border-0 focus:outline-none text-gray-700 placeholder:text-gray-400 bg-transparent text-base rounded-lg">
+            </div>
+          </div>
+        </section>
+        
+        <!-- Categories Section -->
+        <section id="categoriesSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-8">
+          <div class="mb-6">
+            <h2 class="text-xl font-bold text-gray-900 mb-1">Категорії</h2>
+            <p class="text-sm text-gray-600">Популярні напрямі міських можливостей — оберіть те, що вам потрібно.</p>
+          </div>
+          
+          <div id="categoriesGrid" class="grid grid-cols-2 md:grid-cols-5 gap-3 xl:gap-4">
+            <!-- Categories will be injected here -->
+          </div>
+        </section>
+        
+        <!-- Services Section -->
+        <section id="servicesSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6 pb-12">
+          <div class="flex items-center justify-between gap-4 mb-4 flex-wrap">
+            <h2 id="servicesTitle" class="text-xl font-bold text-gray-900">Популярне</h2>
+            <button id="backButton" class="text-blue-600 text-sm font-medium items-center gap-1 hidden" onclick="showPopular()">
+              <i data-lucide="chevron-left" class="w-4 h-4 inline"></i>
+              Назад
+            </button>
+          </div>
+          
+          <div id="servicesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Services will be injected here -->
+          </div>
+        </section>
+      </main>
+      
+      <!-- Footer -->
+      <footer class="bg-[#0a1628] text-white">
+        <div class="h-1" style="background: linear-gradient(90deg, #3b82f6 0%, #3b82f6 35%, #facc15 50%, #3b82f6 65%, #3b82f6 100%);"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div class="grid md:grid-cols-3 gap-8">
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <img src="gerb.png" alt="Герб Дніпра" class="w-10 h-12 object-contain">
+                <span class="text-2xl font-bold leading-tight">Дніпро</span>
+              </div>
+              <p class="text-gray-400 text-sm">Дніпровська міська рада</p>
+              <p class="text-gray-400 text-sm">офіційний веб-сайт</p>
+            </div>
+            
+            <div>
+              <h3 class="font-bold mb-3 text-sm tracking-wider">ГАРЯЧА ЛІНІЯ</h3>
+              <div class="space-y-2 text-sm text-gray-300">
+                <p class="text-xs text-gray-400 uppercase">ЦІЛОДОБОВА<br>ЄДИНА ГАРЯЧА ЛІНІЯ<br>ДЛЯ ЗВЕРНЕНЬ ГРОМАДЯН</p>
+                <div class="space-y-1 mt-3">
+                  <p>
+                    <a href="tel:+380567321212" class="hover:text-blue-400 transition-colors">+380 (56) 732 12 12</a>
+                    &nbsp;
+                    <a href="tel:+380957321212" class="hover:text-blue-400 transition-colors">+380 (95) 732 12 12</a>
+                  </p>
+                  <p>
+                    <a href="tel:+380967321212" class="hover:text-blue-400 transition-colors">+380 (96) 732 12 12</a>
+                    &nbsp;
+                    <a href="tel:+380737321212" class="hover:text-blue-400 transition-colors">+380 (73) 732 12 12</a>
+                  </p>
+                </div>
+                <a href="mailto:zvernennya@dmr.dp.ua" class="text-blue-400 hover:text-blue-300 transition-colors mt-2 block">zvernennya@dmr.dp.ua</a>
+              </div>
+            </div>
+            
+            <div class="text-right">
+              <h3 class="font-bold mb-3 text-sm tracking-wider">КОНТАКТИ</h3>
+              <div class="space-y-1 text-sm text-gray-300">
+                <p>49000, М. ДНІПРО,</p>
+                <p>просп. ДМИТРА ЯВОРНИЦЬКОГО, 75</p>
+                <a href="mailto:office@dniprorada.gov.ua" class="text-blue-400 hover:text-blue-300 transition-colors mt-3 block">office@dniprorada.gov.ua</a>
+                <a href="mailto:office@dmr.dp.ua" class="text-blue-400 hover:text-blue-300 transition-colors block">office@dmr.dp.ua</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Data
+    const categories = [
+      { id: 1, title: "Послуги", icon: "file-text", bgColor: "bg-blue-500", hoverShadow: "hover:shadow-blue-500/30", hoverBorder: "hover:border-blue-400/50", selectedBorder: "border-blue-400", selectedRing: "ring-blue-400/50" },
+      { id: 2, title: "Освіта та навчання", icon: "cloud", bgColor: "bg-emerald-500", hoverShadow: "hover:shadow-emerald-500/30", hoverBorder: "hover:border-emerald-400/50", selectedBorder: "border-emerald-400", selectedRing: "ring-emerald-400/50" },
+      { id: 3, title: "Медицина", icon: "heart", bgColor: "bg-orange-500", hoverShadow: "hover:shadow-orange-500/30", hoverBorder: "hover:border-orange-400/50", selectedBorder: "border-orange-400", selectedRing: "ring-orange-400/50" },
+      { id: 4, title: "Транспорт", icon: "bus", bgColor: "bg-teal-500", hoverShadow: "hover:shadow-teal-500/30", hoverBorder: "hover:border-teal-400/50", selectedBorder: "border-teal-400", selectedRing: "ring-teal-400/50" },
+      { id: 5, title: "Підтримка під час війни", icon: "heart-handshake", bgColor: "bg-red-500", hoverShadow: "hover:shadow-red-500/30", hoverBorder: "hover:border-red-400/50", selectedBorder: "border-red-400", selectedRing: "ring-red-400/50" },
+      { id: 6, title: "Пам'ять", icon: "bookmark", bgColor: "bg-pink-400", hoverShadow: "hover:shadow-pink-400/30", hoverBorder: "hover:border-pink-300/50", selectedBorder: "border-pink-300", selectedRing: "ring-pink-300/50" },
+      { id: 7, title: "Культура", icon: "theater", bgColor: "bg-orange-400", hoverShadow: "hover:shadow-orange-400/30", hoverBorder: "hover:border-orange-300/50", selectedBorder: "border-orange-300", selectedRing: "ring-orange-300/50" },
+      { id: 8, title: "Мапи і довідники", icon: "map-pin", bgColor: "bg-green-500", hoverShadow: "hover:shadow-green-500/30", hoverBorder: "hover:border-green-400/50", selectedBorder: "border-green-400", selectedRing: "ring-green-400/50" },
+      { id: 9, title: "Бізнес", icon: "briefcase", bgColor: "bg-cyan-500", hoverShadow: "hover:shadow-cyan-500/30", hoverBorder: "hover:border-cyan-400/50", selectedBorder: "border-cyan-400", selectedRing: "ring-cyan-400/50" },
+      { id: 10, title: "Повідомити про корупцію", icon: "shield", bgColor: "bg-purple-500", hoverShadow: "hover:shadow-purple-500/30", hoverBorder: "hover:border-purple-400/50", selectedBorder: "border-purple-400", selectedRing: "ring-purple-400/50" }
+    ];
+    
+    const servicesByCategory = {
+      popular: [
+        { id: 1, title: "єДніпро", description: "Усі міські сервіси в одному мобільному застосунку", icon: "building-2", url: "https://ednipro.dniprorada.gov.ua/" },
+        { id: 2, title: "Безпечне місто", description: "Моніторинг 24/7, запит на відео з камер спостереження", icon: "shield", url: "https://inforada.github.io/safecity/" },
+        { id: 3, title: "Контакт-Центр міста Дніпра", description: "Єдина система звернень щодо аварійних ситуацій", icon: "phone", url: "https://hotline.dniprorada.gov.ua/" },
+        { id: 4, title: "Мапа укриттів", description: "Швидкий пошук найближчого сховища", icon: "map-pin", url: "https://dniprotransparentcities.github.io/shelter/" },
+        { id: 5, title: "Мапа пунктів незламності", description: "Знайти локацію поруч за кілька кліків", icon: "map-pin", url: "https://dniprotransparentcities.github.io/InvincibilityPoints/" },
+        { id: 6, title: "Документи міської ради", description: "Пошук проєктів та прийнятих документів", icon: "file-text", url: "https://dniprorada.gov.ua/uk/page/dokumenti-miskoi-radi#gsc.tab=0" },
+        { id: 7, title: "Електронні звернення", description: "Подати звернення онлайн", icon: "mail", url: "https://gromada.dniprorada.gov.ua/" },
+        { id: 8, title: "Онлайн реєстрація на сесію міської ради", description: "Реєстрація для участі в засіданнях", icon: "users", url: "https://rada.dniprorada.gov.ua/" },
+        { id: 9, title: "Портал відкритих даних", description: "Доступ до відкритих даних міста", icon: "file-text", url: "https://data.dniprorada.gov.ua/" }
+      ],
+      1: [
+        { id: 1, title: "ЦНАП м. Дніпра", description: "Адміністративні послуги онлайн", icon: "building-2" },
+        { id: 2, title: "Електронна черга", description: "Запис до ЦНАП", icon: "clock" },
+        { id: 3, title: "Ритуальні послуги", description: "Реєстрація місця поховання", icon: "file-text" },
+        { id: 4, title: "Дніпро Соціальний", description: "Соціальні послуги міста", icon: "heart" }
+      ],
+      2: [
+        { id: 1, title: "Національне тестування", description: "Онлайн-платформа підготовки учнів", icon: "graduation-cap" },
+        { id: 2, title: "MyBook", description: "Безкоштовна онлайн-бібліотека з підручниками", icon: "book-open" },
+        { id: 3, title: "Онлайн-курси «Дніпро»", description: "Платформа освітніх курсів", icon: "graduation-cap" },
+        { id: 4, title: "Дошкільнятко", description: "Освітні програми та ігри", icon: "book-open" },
+        { id: 5, title: "Освітня траєкторія", description: "Професійний розвиток освітян", icon: "graduation-cap" },
+        { id: 6, title: "Освіта Дніпра", description: "Школи, садочки, учнівський квиток", icon: "graduation-cap" }
+      ],
+      3: [
+        { id: 1, title: "Лікарі 24/7", description: "Онлайн-запис до лікаря", icon: "heart" },
+        { id: 2, title: "Helsi.me", description: "Електронна медична система", icon: "heart" }
+      ],
+      4: [
+        { id: 1, title: "Електротранспорт", description: "Розклад руху та тарифи", icon: "bus" },
+        { id: 2, title: "Паркування", description: "Контроль та оплата паркування", icon: "car" },
+        { id: 3, title: "UNIP", description: "Мобільна оплата паркування", icon: "credit-card" }
+      ],
+      5: [
+        { id: 1, title: "Програма допомоги від держави «Відновлення»", description: "Державна програма підтримки", icon: "heart-handshake" },
+        { id: 2, title: "Програма допомоги від міста", description: "Міська програма підтримки", icon: "heart" },
+        { id: 3, title: "Внутрішньо переміщеним особам", description: "Допомога ВПО", icon: "users" },
+        { id: 4, title: "Підтримка ветеранів та їх сімей", description: "Програми для ветеранів", icon: "shield" },
+        { id: 5, title: "«Родина Героя»", description: "Підтримка родин захисників", icon: "heart" },
+        { id: 6, title: "Співфінансування проєктів на допомогу ЗСУ", description: "Підтримка ЗСУ", icon: "shield" },
+        { id: 7, title: "Форпост Дніпро", description: "Волонтерська платформа", icon: "heart-handshake" }
+      ],
+      6: [
+        { id: 1, title: "Меморіальна платформа «Війна»", description: "Вшанування пам'яті загиблих", icon: "bookmark" }
+      ],
+      7: [
+        { id: 1, title: "Культурна спадщина Дніпра", description: "Історико-культурні пам'ятки міста", icon: "theater" },
+        { id: 2, title: "Музей історії Дніпра", description: "Експозиції та виставки", icon: "building-2" }
+      ],
+      8: [
+        { id: 1, title: "Мапа укриттів", description: "Швидкий пошук найближчого сховища", icon: "map-pin" },
+        { id: 2, title: "Мапа пунктів незламності", description: "Знайти локацію поруч", icon: "map-pin" },
+        { id: 3, title: "Мапа безбар'єрності", description: "Доступність міського простору", icon: "map" },
+        { id: 4, title: "Перейменування вулиць", description: "Нові назви вулиць Дніпра", icon: "file-text" }
+      ],
+      9: [
+        { id: 1, title: "Держгеокадастр", description: "Електронні сервіси земельного кадастру", icon: "map", url: "https://e.land.gov.ua/services" },
+        { id: 2, title: "Збірник проєктів міста", description: "Інвестиційні можливості Дніпра", icon: "file-text" },
+        { id: 3, title: "Агентство розвитку Дніпра", description: "Підтримка інвесторів та бізнесу", icon: "briefcase" }
+      ],
+      10: [
+        { id: 1, title: "Канали повідомлення", description: "Як повідомити про корупцію", icon: "shield", url: "https://dniprorada.gov.ua/uk/page/povidomiti-pro-korupciyu#gsc.tab=0" },
+        { id: 2, title: "Онлайн-форма повідомлення про корупцію", description: "Подати повідомлення онлайн", icon: "mail", url: "https://dmr.dp.ua/dp-corruption/" },
+        { id: 3, title: "Анонімне повідомлення про корупцію", description: "Анонімне повідомлення", icon: "mail", url: "https://dmr.dp.ua/dp-corruption-anonim/" }
+      ]
+    };
+    
+    let selectedCategory = null;
+    let searchQuery = "";
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      lucide.createIcons();
+      renderCategories();
+      renderServices(servicesByCategory.popular);
+      setupSearch();
+      startGlowBoxAnimation();
+    });
+    
+    function renderCategories() {
+      const grid = document.getElementById('categoriesGrid');
+      grid.innerHTML = categories.map(cat => `
+        <div onclick="selectCategory(${cat.id})" 
+             id="category-${cat.id}"
+             class="rounded-2xl p-4 shadow-lg border border-white/20 cursor-pointer group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${cat.hoverShadow} ${cat.hoverBorder} glass-card">
+          <div class="w-12 h-12 ${cat.bgColor} rounded-xl flex items-center justify-center mb-3 shadow-md">
+            <i data-lucide="${cat.icon}" class="w-6 h-6 text-white"></i>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="font-medium text-gray-800 text-sm">${cat.title}</h3>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 flex-shrink-0"></i>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+    
+    function renderServices(services, categoryId = null) {
+      const grid = document.getElementById('servicesGrid');
+      const category = categoryId ? categories.find(c => c.id === categoryId) : null;
+      const iconColorClass = category ? category.bgColor.replace('bg-', 'text-') : 'text-blue-600';
+      const hoverShadow = category ? category.hoverShadow : 'hover:shadow-blue-500/20';
+      const hoverBorder = category ? category.hoverBorder : 'hover:border-blue-300/40';
+      
+      grid.innerHTML = services.map((service, index) => `
+        <a href="${service.url || '#'}" ${service.url ? 'target="_blank" rel="noopener noreferrer"' : ''} 
+           class="rounded-2xl p-5 shadow-lg border border-white/20 flex items-center gap-4 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full min-h-[88px] ${hoverShadow} ${hoverBorder} glass-card"
+           style="animation: fadeInUp 0.3s ease-out forwards; animation-delay: ${index * 50}ms; opacity: 0;">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(12px);">
+            <i data-lucide="${service.icon}" class="w-6 h-6 ${iconColorClass}"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-medium text-gray-800 text-base leading-tight">${service.title}</h3>
+            <p class="text-sm text-gray-600 line-clamp-2 leading-tight mt-1">${service.description}</p>
+          </div>
+          <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400 flex-shrink-0"></i>
+        </a>
+      `).join('');
+      
+      // Add animation keyframes
+      if (!document.getElementById('fadeInUpStyle')) {
+        const style = document.createElement('style');
+        style.id = 'fadeInUpStyle';
+        style.textContent = `
+          @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+      
+      lucide.createIcons();
+    }
+    
+    function selectCategory(id) {
+      selectedCategory = id;
+      const category = categories.find(c => c.id === id);
+      
+      // Update category visuals
+      categories.forEach(cat => {
+        const el = document.getElementById(`category-${cat.id}`);
+        if (cat.id === id) {
+          el.classList.add(cat.selectedBorder, 'ring-2', cat.selectedRing, '-translate-y-1');
+          el.classList.remove('border-white/20');
+          el.classList.remove('glass-card');
+          el.classList.add('glass-card-bright');
+        } else {
+          el.classList.remove(cat.selectedBorder, 'ring-2', cat.selectedRing, '-translate-y-1');
+          el.classList.add('border-white/20');
+          el.classList.remove('glass-card-bright');
+          el.classList.add('glass-card');
+        }
+      });
+      
+      // Update title and services
+      document.getElementById('servicesTitle').textContent = category.title;
+      document.getElementById('backButton').classList.remove('hidden');
+      document.getElementById('backButton').classList.add('flex');
+      
+      renderServices(servicesByCategory[id] || [], id);
+      
+      // Scroll to services
+      setTimeout(() => {
+        document.getElementById('servicesSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 150);
+    }
+    
+    function showPopular() {
+      selectedCategory = null;
+      searchQuery = "";
+      document.getElementById('searchInput').value = "";
+      
+      // Reset category visuals
+      categories.forEach(cat => {
+        const el = document.getElementById(`category-${cat.id}`);
+        el.classList.remove(cat.selectedBorder, 'ring-2', cat.selectedRing, '-translate-y-1');
+        el.classList.add('border-white/20');
+        el.classList.remove('glass-card-bright');
+        el.classList.add('glass-card');
+      });
+      
+      document.getElementById('servicesTitle').textContent = 'Популярне';
+      document.getElementById('backButton').classList.add('hidden');
+      document.getElementById('backButton').classList.remove('flex');
+      document.getElementById('categoriesSection').style.display = 'block';
+      
+      renderServices(servicesByCategory.popular);
+    }
+    
+    function setupSearch() {
+      const input = document.getElementById('searchInput');
+      const container = document.getElementById('searchContainer');
+      
+      input.addEventListener('focus', () => {
+        container.classList.add('border-blue-400/60', 'shadow-xl', 'shadow-blue-500/20');
+        container.classList.remove('border-white/30');
+        container.style.background = 'rgba(255, 255, 255, 0.6)';
+      });
+      
+      input.addEventListener('blur', () => {
+        container.classList.remove('border-blue-400/60', 'shadow-xl', 'shadow-blue-500/20');
+        container.classList.add('border-white/30');
+        container.style.background = 'rgba(255, 255, 255, 0.4)';
+      });
+      
+      input.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase();
+        if (searchQuery.trim()) {
+          // Search all services
+          const allServices = [];
+          Object.values(servicesByCategory).forEach(services => {
+            services.forEach(s => {
+              if (!allServices.find(as => as.title === s.title)) {
+                allServices.push(s);
+              }
+            });
+          });
+          
+          const filtered = allServices.filter(s => 
+            s.title.toLowerCase().includes(searchQuery) || 
+            s.description.toLowerCase().includes(searchQuery)
+          );
+          
+          document.getElementById('servicesTitle').textContent = `Результати пошуку "${e.target.value}"`;
+          document.getElementById('backButton').classList.remove('hidden');
+          document.getElementById('backButton').classList.add('flex');
+          document.getElementById('categoriesSection').style.display = 'none';
+          
+          renderServices(filtered);
+        } else {
+          showPopular();
+        }
+      });
+    }
+    
+    function startGlowBoxAnimation() {
+      const container = document.getElementById('glowBoxes');
+      
+      function generateBoxes() {
+        container.innerHTML = '';
+        for (let i = 0; i < 4; i++) {
+          const box = document.createElement('div');
+          box.className = 'absolute border border-blue-300/40 rounded-md animate-single-pulse';
+          box.style.top = `${Math.random() * 60 + 15}%`;
+          box.style.left = `${Math.random() * 75 + 10}%`;
+          const size = Math.random() * 6 + 10;
+          box.style.width = `${size * 4}px`;
+          box.style.height = `${size * 4}px`;
+          box.style.animationDelay = `${i * 2}s`;
+          container.appendChild(box);
+        }
+      }
+      
+      generateBoxes();
+      setInterval(generateBoxes, 10000);
+    }
+  </script>
+</body>
+</html>
