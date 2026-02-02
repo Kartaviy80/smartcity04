@@ -100,6 +100,60 @@
       overflow: hidden;
     }
     
+    .service-card {
+      transition: all 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .category-card {
+      transition: all 0.3s ease;
+    }
+    .category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .category-card.selected {
+      transform: translateY(-4px);
+      border-width: 2px;
+      background: rgba(255, 255, 255, 0.25);
+    }
+    .category-card[data-color="blue"].selected { border-color: rgb(96, 165, 250); box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3); }
+    .category-card[data-color="emerald"].selected { border-color: rgb(52, 211, 153); box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.3); }
+    .category-card[data-color="orange"].selected { border-color: rgb(251, 146, 60); box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.3); }
+    .category-card[data-color="teal"].selected { border-color: rgb(45, 212, 191); box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.3); }
+    .category-card[data-color="red"].selected { border-color: rgb(248, 113, 113); box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.3); }
+    .category-card[data-color="pink"].selected { border-color: rgb(244, 114, 182); box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.3); }
+    .category-card[data-color="orange-light"].selected { border-color: rgb(251, 146, 60); box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.3); }
+    .category-card[data-color="green"].selected { border-color: rgb(74, 222, 128); box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.3); }
+    .category-card[data-color="cyan"].selected { border-color: rgb(34, 211, 238); box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.3); }
+    .category-card[data-color="purple"].selected { border-color: rgb(168, 85, 247); box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.3); }
+    
+    .category-card[data-color="blue"]:hover { box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.2); border-color: rgba(96, 165, 250, 0.5); }
+    .category-card[data-color="emerald"]:hover { box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.2); border-color: rgba(52, 211, 153, 0.5); }
+    .category-card[data-color="orange"]:hover { box-shadow: 0 20px 25px -5px rgba(249, 115, 22, 0.2); border-color: rgba(251, 146, 60, 0.5); }
+    .category-card[data-color="teal"]:hover { box-shadow: 0 20px 25px -5px rgba(20, 184, 166, 0.2); border-color: rgba(45, 212, 191, 0.5); }
+    .category-card[data-color="red"]:hover { box-shadow: 0 20px 25px -5px rgba(239, 68, 68, 0.2); border-color: rgba(248, 113, 113, 0.5); }
+    .category-card[data-color="pink"]:hover { box-shadow: 0 20px 25px -5px rgba(236, 72, 153, 0.2); border-color: rgba(244, 114, 182, 0.5); }
+    .category-card[data-color="orange-light"]:hover { box-shadow: 0 20px 25px -5px rgba(251, 146, 60, 0.2); border-color: rgba(253, 186, 116, 0.5); }
+    .category-card[data-color="green"]:hover { box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.2); border-color: rgba(74, 222, 128, 0.5); }
+    .category-card[data-color="cyan"]:hover { box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.2); border-color: rgba(34, 211, 238, 0.5); }
+    .category-card[data-color="purple"]:hover { box-shadow: 0 20px 25px -5px rgba(168, 85, 247, 0.2); border-color: rgba(192, 132, 252, 0.5); }
+    
+    .service-card[data-color="blue"]:hover { box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.15); border-color: rgba(96, 165, 250, 0.4); }
+    .service-card[data-color="emerald"]:hover { box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.15); border-color: rgba(52, 211, 153, 0.4); }
+    .service-card[data-color="orange"]:hover { box-shadow: 0 20px 25px -5px rgba(249, 115, 22, 0.15); border-color: rgba(251, 146, 60, 0.4); }
+    .service-card[data-color="teal"]:hover { box-shadow: 0 20px 25px -5px rgba(20, 184, 166, 0.15); border-color: rgba(45, 212, 191, 0.4); }
+    .service-card[data-color="red"]:hover { box-shadow: 0 20px 25px -5px rgba(239, 68, 68, 0.15); border-color: rgba(248, 113, 113, 0.4); }
+    .service-card[data-color="pink"]:hover { box-shadow: 0 20px 25px -5px rgba(236, 72, 153, 0.15); border-color: rgba(244, 114, 182, 0.4); }
+    .service-card[data-color="orange-light"]:hover { box-shadow: 0 20px 25px -5px rgba(251, 146, 60, 0.15); border-color: rgba(253, 186, 116, 0.4); }
+    .service-card[data-color="green"]:hover { box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.15); border-color: rgba(74, 222, 128, 0.4); }
+    .service-card[data-color="cyan"]:hover { box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.15); border-color: rgba(34, 211, 238, 0.4); }
+    .service-card[data-color="purple"]:hover { box-shadow: 0 20px 25px -5px rgba(168, 85, 247, 0.15); border-color: rgba(192, 132, 252, 0.4); }
+    
     .glass-card {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(24px);
@@ -190,11 +244,17 @@
                 </p>
                 
                 <div class="flex flex-wrap gap-4">
-                  <a href="https://ednipro.dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-3 text-sm font-medium shadow-md shadow-blue-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/40 hover:-translate-y-0.5">
+                  <a href="https://dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-3 text-sm font-medium shadow-md shadow-blue-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/40 hover:-translate-y-0.5">
+                    Дніпровська міська рада
+                  </a>
+                  <a href="https://ednipro.dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="rounded-lg px-6 py-3 text-sm font-medium text-white border border-cyan-500/40 transition-all duration-300 hover:border-cyan-400/60 hover:-translate-y-0.5" style="background: rgba(6, 182, 212, 0.25); backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);">
                     Завантажити єДніпро
                   </a>
-                  <a href="https://dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="rounded-lg px-6 py-3 text-sm font-medium text-white border border-cyan-500/40 transition-all duration-300 hover:border-cyan-400/60 hover:-translate-y-0.5" style="background: rgba(6, 182, 212, 0.25); backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);">
-                    Дніпровська міська рада
+                  <a href="https://inforada.github.io/safecity/" target="_blank" rel="noopener noreferrer" class="rounded-lg px-6 py-3 text-sm font-medium text-white border border-cyan-500/40 transition-all duration-300 hover:border-cyan-400/60 hover:-translate-y-0.5" style="background: rgba(6, 182, 212, 0.25); backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);">
+                    Безпечне місто
+                  </a>
+                  <a href="https://hotline.dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="rounded-lg px-6 py-3 text-sm font-medium text-white border border-cyan-500/40 transition-all duration-300 hover:border-cyan-400/60 hover:-translate-y-0.5" style="background: rgba(6, 182, 212, 0.25); backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);">
+                    Контакт-Центр
                   </a>
                 </div>
               </div>
@@ -251,8 +311,7 @@
                 <img src="gerb.png" alt="Герб Дніпра" class="w-10 h-12 object-contain">
                 <span class="text-2xl font-bold leading-tight">Дніпро</span>
               </div>
-              <p class="text-gray-400 text-sm">Дніпровська міська рада</p>
-              <p class="text-gray-400 text-sm">офіційний веб-сайт</p>
+              <p class="text-gray-400 text-sm">Розроблено КП «ІНФО-РАДА-ДНІПРО»</p>
             </div>
             
             <div>
@@ -293,16 +352,16 @@
   <script>
     // Data
     const categories = [
-      { id: 1, title: "Послуги", icon: "file-text", bgColor: "bg-blue-500", hoverShadow: "hover:shadow-blue-500/30", hoverBorder: "hover:border-blue-400/50", selectedBorder: "border-blue-400", selectedRing: "ring-blue-400/50" },
-      { id: 2, title: "Освіта та навчання", icon: "cloud", bgColor: "bg-emerald-500", hoverShadow: "hover:shadow-emerald-500/30", hoverBorder: "hover:border-emerald-400/50", selectedBorder: "border-emerald-400", selectedRing: "ring-emerald-400/50" },
-      { id: 3, title: "Медицина", icon: "heart", bgColor: "bg-orange-500", hoverShadow: "hover:shadow-orange-500/30", hoverBorder: "hover:border-orange-400/50", selectedBorder: "border-orange-400", selectedRing: "ring-orange-400/50" },
-      { id: 4, title: "Транспорт", icon: "bus", bgColor: "bg-teal-500", hoverShadow: "hover:shadow-teal-500/30", hoverBorder: "hover:border-teal-400/50", selectedBorder: "border-teal-400", selectedRing: "ring-teal-400/50" },
-      { id: 5, title: "Підтримка під час війни", icon: "heart-handshake", bgColor: "bg-red-500", hoverShadow: "hover:shadow-red-500/30", hoverBorder: "hover:border-red-400/50", selectedBorder: "border-red-400", selectedRing: "ring-red-400/50" },
-      { id: 6, title: "Пам'ять", icon: "bookmark", bgColor: "bg-pink-400", hoverShadow: "hover:shadow-pink-400/30", hoverBorder: "hover:border-pink-300/50", selectedBorder: "border-pink-300", selectedRing: "ring-pink-300/50" },
-      { id: 7, title: "Культура", icon: "theater", bgColor: "bg-orange-400", hoverShadow: "hover:shadow-orange-400/30", hoverBorder: "hover:border-orange-300/50", selectedBorder: "border-orange-300", selectedRing: "ring-orange-300/50" },
-      { id: 8, title: "Мапи і довідники", icon: "map-pin", bgColor: "bg-green-500", hoverShadow: "hover:shadow-green-500/30", hoverBorder: "hover:border-green-400/50", selectedBorder: "border-green-400", selectedRing: "ring-green-400/50" },
-      { id: 9, title: "Бізнес", icon: "briefcase", bgColor: "bg-cyan-500", hoverShadow: "hover:shadow-cyan-500/30", hoverBorder: "hover:border-cyan-400/50", selectedBorder: "border-cyan-400", selectedRing: "ring-cyan-400/50" },
-      { id: 10, title: "Повідомити про корупцію", icon: "shield", bgColor: "bg-purple-500", hoverShadow: "hover:shadow-purple-500/30", hoverBorder: "hover:border-purple-400/50", selectedBorder: "border-purple-400", selectedRing: "ring-purple-400/50" }
+      { id: 1, title: "Послуги", icon: "file-text", image: "categories/poslugi.png", bgColor: "bg-blue-500", color: "blue", iconTextColor: "text-blue-600" },
+      { id: 2, title: "Освіта та навчання", icon: "cloud", image: "categories/education.png", bgColor: "bg-emerald-500", color: "emerald", iconTextColor: "text-emerald-600" },
+      { id: 3, title: "Медицина", icon: "heart", image: "categories/medicine.png", bgColor: "bg-orange-500", color: "orange", iconTextColor: "text-orange-600" },
+      { id: 4, title: "Транспорт", icon: "bus", image: "categories/transport.png", bgColor: "bg-teal-500", color: "teal", iconTextColor: "text-teal-600" },
+      { id: 5, title: "Підтримка під час війни", icon: "heart-handshake", image: "categories/war.png", bgColor: "bg-red-500", color: "red", iconTextColor: "text-red-600" },
+      { id: 6, title: "Пам'ять", icon: "bookmark", image: "categories/pamiat.png", bgColor: "bg-pink-400", color: "pink", iconTextColor: "text-pink-500" },
+      { id: 7, title: "Культура", icon: "theater", image: "categories/culture.png", bgColor: "bg-orange-400", color: "orange-light", iconTextColor: "text-orange-500" },
+      { id: 8, title: "Мапи і довідники", icon: "map-pin", image: "categories/maps.png", bgColor: "bg-green-500", color: "green", iconTextColor: "text-green-600" },
+      { id: 9, title: "Бізнес", icon: "briefcase", image: "categories/business.png", bgColor: "bg-cyan-500", color: "cyan", iconTextColor: "text-cyan-600" },
+      { id: 10, title: "Повідомити про корупцію", icon: "shield", image: "categories/corupcia.png", bgColor: "bg-purple-500", color: "purple", iconTextColor: "text-purple-600" }
     ];
     
     const servicesByCategory = {
@@ -391,10 +450,17 @@
       grid.innerHTML = categories.map(cat => `
         <div onclick="selectCategory(${cat.id})" 
              id="category-${cat.id}"
-             class="rounded-2xl p-4 shadow-lg border border-white/20 cursor-pointer group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${cat.hoverShadow} ${cat.hoverBorder} glass-card">
-          <div class="w-12 h-12 ${cat.bgColor} rounded-xl flex items-center justify-center mb-3 shadow-md">
-            <i data-lucide="${cat.icon}" class="w-6 h-6 text-white"></i>
-          </div>
+             data-color="${cat.color}"
+             class="rounded-2xl p-4 shadow-lg border border-white/20 cursor-pointer group glass-card category-card">
+          ${cat.image ? `
+            <div class="w-24 h-20 mb-2 flex items-center justify-center -mt-1 -mx-1">
+              <img src="${cat.image}" alt="${cat.title}" class="w-full h-full object-contain" />
+            </div>
+          ` : `
+            <div class="w-12 h-12 ${cat.bgColor} rounded-xl flex items-center justify-center mb-3 shadow-md">
+              <i data-lucide="${cat.icon}" class="w-6 h-6 text-white"></i>
+            </div>
+          `}
           <div class="flex items-center justify-between gap-2">
             <h3 class="font-medium text-gray-800 text-sm">${cat.title}</h3>
             <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 flex-shrink-0"></i>
@@ -407,13 +473,13 @@
     function renderServices(services, categoryId = null) {
       const grid = document.getElementById('servicesGrid');
       const category = categoryId ? categories.find(c => c.id === categoryId) : null;
-      const iconColorClass = category ? category.bgColor.replace('bg-', 'text-') : 'text-blue-600';
-      const hoverShadow = category ? category.hoverShadow : 'hover:shadow-blue-500/20';
-      const hoverBorder = category ? category.hoverBorder : 'hover:border-blue-300/40';
+      const iconColorClass = category ? category.iconTextColor : 'text-blue-600';
+      const dataColor = category ? category.color : 'blue';
       
       grid.innerHTML = services.map((service, index) => `
         <a href="${service.url || '#'}" ${service.url ? 'target="_blank" rel="noopener noreferrer"' : ''} 
-           class="rounded-2xl p-5 shadow-lg border border-white/20 flex items-center gap-4 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full min-h-[88px] ${hoverShadow} ${hoverBorder} glass-card"
+           data-color="${dataColor}"
+           class="rounded-2xl p-5 shadow-lg border border-white/20 flex items-center gap-4 cursor-pointer h-full min-h-[88px] glass-card service-card"
            style="animation: fadeInUp 0.3s ease-out forwards; animation-delay: ${index * 50}ms; opacity: 0;">
           <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(12px);">
             <i data-lucide="${service.icon}" class="w-6 h-6 ${iconColorClass}"></i>
@@ -450,12 +516,12 @@
       categories.forEach(cat => {
         const el = document.getElementById(`category-${cat.id}`);
         if (cat.id === id) {
-          el.classList.add(cat.selectedBorder, 'ring-2', cat.selectedRing, '-translate-y-1');
+          el.classList.add('selected');
           el.classList.remove('border-white/20');
           el.classList.remove('glass-card');
           el.classList.add('glass-card-bright');
         } else {
-          el.classList.remove(cat.selectedBorder, 'ring-2', cat.selectedRing, '-translate-y-1');
+          el.classList.remove('selected');
           el.classList.add('border-white/20');
           el.classList.remove('glass-card-bright');
           el.classList.add('glass-card');
@@ -483,7 +549,7 @@
       // Reset category visuals
       categories.forEach(cat => {
         const el = document.getElementById(`category-${cat.id}`);
-        el.classList.remove(cat.selectedBorder, 'ring-2', cat.selectedRing, '-translate-y-1');
+        el.classList.remove('selected');
         el.classList.add('border-white/20');
         el.classList.remove('glass-card-bright');
         el.classList.add('glass-card');
