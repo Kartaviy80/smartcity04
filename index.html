@@ -227,7 +227,7 @@
         <!-- Hero Section -->
         <section class="relative py-12 lg:py-16 xl:py-18">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
-            <div class="grid lg:grid-cols-2 gap-8 items-center">
+            <div>
               <div>
                 <a href="pro-dnipro.pdf" target="_blank" rel="noopener noreferrer" class="inline-block mb-6 px-5 py-2 rounded-full border border-white/60 text-white text-sm font-medium hover:bg-white/15 transition-all duration-300" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
                   Про Дніпро
@@ -243,22 +243,21 @@
                   Платформа міських сервісів для взаємодії з громадою
                 </p>
                 
-                <div class="flex flex-wrap gap-4">
-                  <a href="https://dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-3 text-sm font-medium shadow-md shadow-blue-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/40 hover:-translate-y-0.5">
+                <div class="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:max-w-3xl">
+                  <a href="https://dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-3 py-2.5 text-sm font-medium shadow-md shadow-blue-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/40 hover:-translate-y-0.5 text-center lg:whitespace-nowrap">
                     Дніпровська міська рада
                   </a>
-                  <a href="https://ednipro.dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="rounded-lg px-6 py-3 text-sm font-medium text-white border border-cyan-500/40 transition-all duration-300 hover:border-cyan-400/60 hover:-translate-y-0.5" style="background: rgba(6, 182, 212, 0.25); backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);">
+                  <a href="https://ednipro.dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="rounded-lg px-3 py-2.5 text-sm font-medium text-white border border-cyan-500/40 transition-all duration-300 hover:border-cyan-400/60 hover:-translate-y-0.5 text-center lg:whitespace-nowrap" style="background: rgba(6, 182, 212, 0.25); backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);">
                     Завантажити єДніпро
                   </a>
-                  <a href="https://inforada.github.io/safecity/" target="_blank" rel="noopener noreferrer" class="rounded-lg px-6 py-3 text-sm font-medium text-white border border-cyan-500/40 transition-all duration-300 hover:border-cyan-400/60 hover:-translate-y-0.5" style="background: rgba(6, 182, 212, 0.25); backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);">
+                  <a href="https://inforada.github.io/safecity/" target="_blank" rel="noopener noreferrer" class="rounded-lg px-3 py-2.5 text-sm font-medium text-white border border-cyan-500/40 transition-all duration-300 hover:border-cyan-400/60 hover:-translate-y-0.5 text-center lg:whitespace-nowrap" style="background: rgba(6, 182, 212, 0.25); backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);">
                     Безпечне місто
                   </a>
-                  <a href="https://hotline.dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="rounded-lg px-6 py-3 text-sm font-medium text-white border border-cyan-500/40 transition-all duration-300 hover:border-cyan-400/60 hover:-translate-y-0.5" style="background: rgba(6, 182, 212, 0.25); backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);">
+                  <a href="https://hotline.dniprorada.gov.ua/" target="_blank" rel="noopener noreferrer" class="rounded-lg px-3 py-2.5 text-sm font-medium text-white border border-cyan-500/40 transition-all duration-300 hover:border-cyan-400/60 hover:-translate-y-0.5 text-center lg:whitespace-nowrap" style="background: rgba(6, 182, 212, 0.25); backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);">
                     Контакт-Центр
                   </a>
                 </div>
               </div>
-              <div class="hidden lg:block"></div>
             </div>
           </div>
         </section>
@@ -347,6 +346,17 @@
         </div>
       </footer>
     </div>
+    
+    <!-- Scroll to top button -->
+    <button
+      id="scrollTopBtn"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+      class="fixed right-6 z-50 w-12 h-12 rounded-xl flex items-center justify-center text-white/80 border border-white/20 hover:border-white/40 hover:-translate-y-1 hover:shadow-lg hover:text-white opacity-0 pointer-events-none"
+      style="bottom: 100px; background: rgba(59, 130, 246, 0.2); backdrop-filter: blur(16px) saturate(120%); -webkit-backdrop-filter: blur(16px) saturate(120%); box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15); transition: opacity 0.3s, transform 0.3s, border-color 0.3s, box-shadow 0.3s;"
+      aria-label="Вгору"
+    >
+      <i data-lucide="chevron-up" class="w-6 h-6"></i>
+    </button>
   </div>
 
   <script>
@@ -443,7 +453,36 @@
       renderServices(servicesByCategory.popular);
       setupSearch();
       startGlowBoxAnimation();
+      setupScrollTopButton();
     });
+    
+    function setupScrollTopButton() {
+      const scrollBtn = document.getElementById('scrollTopBtn');
+      const footer = document.querySelector('footer');
+      
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 400) {
+          scrollBtn.style.opacity = '1';
+          scrollBtn.style.pointerEvents = 'auto';
+        } else {
+          scrollBtn.style.opacity = '0';
+          scrollBtn.style.pointerEvents = 'none';
+        }
+        
+        // Check if button would overlap with footer
+        if (footer) {
+          const footerRect = footer.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          
+          if (footerRect.top < windowHeight) {
+            const overlap = windowHeight - footerRect.top + 24;
+            scrollBtn.style.bottom = Math.max(overlap, 100) + 'px';
+          } else {
+            scrollBtn.style.bottom = '100px';
+          }
+        }
+      });
+    }
     
     function renderCategories() {
       const grid = document.getElementById('categoriesGrid');
